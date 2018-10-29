@@ -1,7 +1,7 @@
 package com.army.groovy
 //面向对象
 //默认都是public
-class PersonBean implements Action, DefaultAction {
+class PersonBean implements Action, DefaultAction, Serializable {
     String name
     int age
 
