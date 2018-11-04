@@ -44,17 +44,30 @@ class Person {
 
     def say() {
         def closure2 = {
-            println "this = " + this
-            println "owner = " + owner
-            println "delegate = " + delegate
+            println "say this = " + this
+            println "say owner = " + owner
+            println "say delegate = " + delegate
         }
         closure2.call()
+    }
+
+    def testClosure(groovy.lang.Closure closure1) {
+        //修改delegate为当前Person对象
+        closure1.delegate = this
+        closure1.call()
     }
 }
 //指向的是类的对象
 def person = new Person()
 //person.closure.call()
 //person.say()
+person.testClosure {
+    println "testClosure this = " + this
+    println "testClosure owner = " + owner
+    println "testClosure delegate = " + delegate
+    //因为修改了delegate为Person对象，所以可以调用Person的方法
+    say()
+}
 
 //闭包中定义闭包
 def nestClosure = {
